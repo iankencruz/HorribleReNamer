@@ -15,14 +15,34 @@ directory = os.getcwd()
 
 def main():
     
-    print("Main Function")
+    user_input = input("1. HorribleSubs \n2. Kaya \n3. Cleo \n4. Custom ")
+
+    # Preset selections 
+    try:
+        val = int(user_input)
+        print("Input is {}".format(user_input))
+        if (val == 1):
+            title = "HorribleSubs"
+        elif (val == 2):
+            title = "Kaya"
+        elif (val == 3):
+            title = "Cleo"
+        elif (val == 4):
+            title = input("Input Text to replace: ")
+    except ValueError:
+        print("Not a valid input! Try again")
+
+
+
+
+
 
     # walk through current directory of file
     for f in os.listdir(directory):
         file_name, file_ext = os.path.splitext(f)       #split name from extension (filename & .mkv)
         
         try:
-            h_sub, f_title = file_name.split('] ')      #seperate [HorribleSubs] from name
+            h_sub, f_title = file_name.split('[{}]'.format(title))      #seperate [HorribleSubs] from name
         
             #Get all necessary file paths
             old_name = '{}\{}{}'.format(directory, file_name, file_ext) #Store old name
