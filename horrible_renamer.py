@@ -8,18 +8,25 @@
 
 import os
 
-directory = os.getcwd()
+directory = "M:\Media\Anime"
+
+
 
 
 
 
 def main():
-    
-    user_input = input("1. HorribleSubs \n2. Kaya \n3. Cleo \n4. Custom ")
 
     # Preset selections 
     try:
-        val = int(user_input)
+        print("Select which tag to clear...")
+        print("1. HorribleSubs")
+        print("2. Kaya")
+        print("3. Cleo")
+        print("4. Custom?")
+        user_input = input("Select Choice...")
+
+        val = int(user_input)                                               #Store input to integer
         print("Input is {}".format(user_input))
         if (val == 1):
             title = "HorribleSubs"
@@ -28,32 +35,26 @@ def main():
         elif (val == 3):
             title = "Cleo"
         elif (val == 4):
-            title = input("Input Text to replace: ")
+            title = input("Input Text to replace: ")                        #Custom Tag
     except ValueError:
         print("Not a valid input! Try again")
 
 
 
-
-
-
-    # walk through current directory of file
-    for f in os.listdir(directory):
-        file_name, file_ext = os.path.splitext(f)       #split name from extension (filename & .mkv)
-        
-        try:
-            h_sub, f_title = file_name.split('[{}]'.format(title))      #seperate [HorribleSubs] from name
-        
-            #Get all necessary file paths
-            old_name = '{}\{}{}'.format(directory, file_name, file_ext) #Store old name
-            new_name = '{}\{}{}'.format(directory, f_title, file_ext)   #Create New Name
-            os.rename(old_name,new_name)                                #Rename
-        except:
-            print("ERROR: Name does not match")                         #Will Fail and print this if filename does not contain [HorribleSubs]
-
-
-
-
+    #  Try Walking through folders
+    for root, dirs, files in os.walk(directory):
+        for name in files:
+            if ('[{}]'.format(title) in name):                              #Only iterate through files with tag
+                file_name, file_ext = os.path.splitext(name)                #Split from extension
+                f_tag, f_title = file_name.split('[{}]'.format(title))      #seperate [HorribleSubs] from name
+                
+                #Get all necessary file paths
+                try:
+                    old_name = '{}\{}{}'.format(root, file_name, file_ext) #Store old name
+                    new_name = '{}\{}{}'.format(root, f_title, file_ext)   #Create New Name
+                    os.rename(old_name, new_name)                          #Renaming
+                except FileNotFoundError:
+                    print("ERROR: Name does not match")                    #Error check
 
 
 
