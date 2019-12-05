@@ -19,10 +19,14 @@ def main():
 
     # Preset selections 
     try:
+        print("Select which tag to clear...")
+        print("1. HorribleSubs")
+        print("2. Kaya")
+        print("3. Cleo")
+        print("4. Custom?")
+        user_input = input("Select Choice...")
 
-        user_input = input("1. HorribleSubs \n2. Kaya \n3. Cleo \n4. Custom ")
-
-        val = int(user_input)
+        val = int(user_input)                                               #Store input to integer
         print("Input is {}".format(user_input))
         if (val == 1):
             title = "HorribleSubs"
@@ -31,7 +35,7 @@ def main():
         elif (val == 3):
             title = "Cleo"
         elif (val == 4):
-            title = input("Input Text to replace: ")
+            title = input("Input Text to replace: ")                        #Custom Tag
     except ValueError:
         print("Not a valid input! Try again")
 
@@ -40,40 +44,17 @@ def main():
     #  Try Walking through folders
     for root, dirs, files in os.walk(directory):
         for name in files:
-            if ('[{}]'.format(title) in name):
-                # print (name)
-                file_name, file_ext = os.path.splitext(name)
-                # print("FileName: " + file_name)
+            if ('[{}]'.format(title) in name):                              #Only iterate through files with tag
+                file_name, file_ext = os.path.splitext(name)                #Split from extension
                 f_tag, f_title = file_name.split('[{}]'.format(title))      #seperate [HorribleSubs] from name
-                # print (f_tag)                                            # Should be empty/ Blank
-                # print(f_title)
+                
+                #Get all necessary file paths
                 try:
-                    #Get all necessary file paths
                     old_name = '{}\{}{}'.format(root, file_name, file_ext) #Store old name
                     new_name = '{}\{}{}'.format(root, f_title, file_ext)   #Create New Name
-
-                    print("Old: " + old_name)
-                    print("New: " + new_name)
-                    os.rename(old_name, new_name) 
-                    print("Try Clause")
-                except:
-                    print("ERROR: Name does not match")
-
-        
-            # try:
-            #     h_sub, f_title = file_name.split('[{}]'.format(title))      #seperate [HorribleSubs] from name
-            
-            #     #Get all necessary file paths
-            #     old_name = '{}\{}{}'.format(directory, file_name, file_ext) #Store old name
-            #     new_name = '{}\{}{}'.format(directory, f_title, file_ext)   #Create New Name
-            #     # os.rename(old_name,new_name)                                #Rename
-            #     print ("Can Rename!")
-            # except:
-            #     pass
-            #    # print("ERROR: Name does not match")                         #Will Fail and print this if filename does not contain [HorribleSubs]
-
-
-
+                    os.rename(old_name, new_name)                          #Renaming
+                except FileNotFoundError:
+                    print("ERROR: Name does not match")                    #Error check
 
 
 
