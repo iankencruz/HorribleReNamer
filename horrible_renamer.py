@@ -1,9 +1,9 @@
 #Batch Renames Horrible subs videos to remove "[HorribleSubs]" in file name
 #Instructions
 #   1. Make sure python is installed in your computer
-#   2. Copy and Paste this file into target folder
+#   2. Replace "directory" to target path
 #   3. Right click and select "Open with" then select python
-#   4. Move to next folder then just double click
+#   4. Select which tag to remove by entering either 1, 2, 3 or 4
 
 
 import os 
