@@ -6,28 +6,26 @@
 #   4. Move to next folder then just double click
 
 
-import os
+import os 
+import msvcrt
 
+#  Set Destination Directory
 directory = "M:\Media\Anime"
-
-
-
-
 
 
 def main():
 
     # Preset selections 
     try:
-        print("Select which tag to clear...")
+        print("Select which tag to clear... \n")
         print("1. HorribleSubs")
         print("2. Kaya")
         print("3. Cleo")
-        print("4. Custom?")
-        user_input = input("Select Choice...")
+        print("4. Custom? \n")
+        user_input = msvcrt.getch()
 
         val = int(user_input)                                               #Store input to integer
-        print("Input is {}".format(user_input))
+        print("Input is {}\n".format(val))
         if (val == 1):
             title = "HorribleSubs"
         elif (val == 2):
@@ -35,7 +33,7 @@ def main():
         elif (val == 3):
             title = "Cleo"
         elif (val == 4):
-            title = input("Input Text to replace: ")                        #Custom Tag
+            title = input("Tag: ")                        #Custom Tag
     except ValueError:
         print("Not a valid input! Try again")
 
