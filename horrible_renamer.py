@@ -44,7 +44,7 @@ def main():
         for name in files:
             if ('[{}]'.format(title) in name):                              #Only iterate through files with tag
                 file_name, file_ext = os.path.splitext(name)                #Split from extension
-                f_tag, f_title = file_name.split('[{}]'.format(title))      #seperate [HorribleSubs] from name
+                f_tag, f_title = file_name.split('[{}] '.format(title))      #seperate [HorribleSubs] from name
                 
                 #Get all necessary file paths
                 try:
