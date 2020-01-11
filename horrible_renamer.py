@@ -50,6 +50,7 @@ def main():
                 try:
                     old_name = '{}\{}{}'.format(root, file_name, file_ext) #Store old name
                     new_name = '{}\{}{}'.format(root, f_title, file_ext)   #Create New Name
+                    new_name.strip()
                     os.rename(old_name, new_name)                          #Renaming
                 except FileNotFoundError:
                     print("ERROR: Name does not match")                    #Error check
